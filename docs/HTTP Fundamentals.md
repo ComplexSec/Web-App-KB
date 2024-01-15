@@ -20,7 +20,7 @@ The same requests are utilized when we use the Internet to visit different websi
 ### URL
 Resources over HTTP are accessed via a URL, which offers many more specifications than simply specifying a website to visit. The structure of a URL is as follows:
 
-```bash
+```bash title="URL Structure"
 http://admin:password@inlanefreight.com:80/dashboard.php?login=true#status
 ```
 
@@ -39,7 +39,7 @@ The breakdown of each component is as follows:
 ### The HTTP Flow
 The first time an end-user enters a [[Uniform Resource Locator|URL]] into the browser, it sends a request to a [[DNS]] server to resolve the domain and get its [[IP Address]]. The DNS server looks up the IP address for inlanefreight.com and returns it. 
 
-!!! info 
+!!! warning 
 
     All domain names need to be resolved this way as a server cannot communicate without an IP address.
 
@@ -56,18 +56,19 @@ The tool "[[cURL]]" is a tool that primarily supports HTTP and other protocols. 
 
 To send a basic HTTP request to any URL, the following syntax can be used:
 
-```bash
+```bash title="Basic cURL Request"
 curl inlanefreight.com
 ```
 
 cURL does not render the [[HTML]]/[[JavaScript]]/[[CSS]] code but instead prints it in raw format. The cURL command can also be used to download a page or file and save it locally via the following syntax:
 
-```bash
+```bash title="cURL Output"
 curl -O inlanefreight.com/index.html
 ```
 
-> [!INFO]
-> The uppercase "O" saves the filename as the one on the website (i.e. index.html) whereas the lowercase "o" allows you to rename it.
+!!! info
+
+    The uppercase "O" saves the filename as the one on the website (i.e. index.html) whereas the lowercase "o" allows you to rename it.
 
 To silence the status of cURL, you can use the "**-s**" flag. You can also use the "**-h**" flag to see any other options that cURL has.
 
@@ -79,14 +80,11 @@ The [[HTTPS Protocol]] was created which transmits all communications in encrypt
 
 Examining an HTTP request via a tool like [[Wireshark]] allows us to see the effect of not enforcing secure communication by allowing us to see the username and password:
 
-> [!WARNING]
-> SCREENSHOT 
+![HTTP Clear Wireshark](imgs/https_clear.png)
 
 However, examining an HTTPS request does not allow us to see the credentials clearly due to encryption:
 
-> [!WARNING]
-> SCREENSHOT 
-
+![HTTP Encrypted Wireshark](imgs/https_google_enc.png)
 
 Websites that enforce HTTPS can be identified through "https://" appearing in the URL. It's important to note that although the data transferred through HTTPS is encrypted, the request can reveal the visited URL if it contacts a clear-text DNS server.
 
@@ -98,32 +96,31 @@ The client sends a "Client Hello" [[Packet]] that provides information about its
 
 Once handshakes are complete, normal HTTP communication continues, which is encrypted. 
 
-> [!info]
-> An attacker may be able to perform an [[HTTP Downgrade Attack]], which downgrades HTTPS to HTTP, making it clear-text. This is done by setting up a [[Man-in-the-Middle (MitM) attack|Man-in-the-Middle]] [[Proxy]] to transfer all traffic through the attacker's host without the user's knowledge. Most modern browsers do protect against this attack.
+!!! info
+
+    An attacker may be able to perform an [[HTTP Downgrade Attack]], which downgrades HTTPS to HTTP, making it clear-text. This is done by setting up a [[Man-in-the-Middle (MitM) attack|Man-in-the-Middle]] [[Proxy]] to transfer all traffic through the attacker's host without the user's knowledge. Most modern browsers do protect against this attack.
 
 ### cURL for HTTPS
 
 cURL can handle all HTTPS communications standards and perform a secure handshake automatically. If you contact a site with an invalid SSL cert or an outdated one, then it will not proceed with the communication:
 
-```bash
+```bash title="Request to HTTPS site"
 curl https://inlanefreight.com
 ```
 
-> [!WARNING]
-> SCREENSHOT 
-
 To skip the certificate check with cURL, use the "**-k**" flag:
 
-```bash
+```bash title="Request to HTTP site (skip certificate check)"
 curl -k https://inlanefreight.com
 ```
+
 ## HTTP Requests and Responses
 
 HTTP communications mainly consist of an HTTP request and HTTP response. An HTTP request is made by the client and processed by the server. The request contains all the details we require from the server, including the resource, any request data, headers or options specified.
 
 Once the server receives the request, it processes it and responds by sending the HTTP response, which contains the response code and may contain the resource data if the requester has access to it.
 
-![[HTTP-request.png]]
+![HTTP Request](imgs/HTTP-request.png)
 
 The first line of any HTTP request contains three main fields:
 
@@ -138,7 +135,7 @@ The next line contains [[HTTP Headers]] like Host, [[User-Agent]] and [[Cookies|
 
 Once a server processes the request, it responds to us:
 
-![[HTTP-Response.png]]
+![HTTP Response](imgs/HTTP-Response.png)
 
 The first line contains the HTTP version and the second denotes the HTTP response code. After the first line, the response lists its headers, similiar to an HTTP request. 
 
@@ -152,7 +149,7 @@ curl inlanefreight.com -v
 
 Most modern browsers come with built-in DevTools intended for devs to test web apps. Whenever we visit a site, the browser sends multiple requests and handles multiple HTTP responses to render the final view:
 
-![[devtools_network_requests.jpg]]
+![DevTools Network Request](imgs/devtools_network_requests.jpg)
 
 It shows the response code, request method, requested resource, and the path.
 
@@ -160,11 +157,11 @@ It shows the response code, request method, requested resource, and the path.
 
 Headers can have one or multiple values, appended after the header name and separate by colon. These are the categories of headers:
 
-- General Headers - contextual and used to describe the message
-- Entity Headers - used to describe the content transferred by a message
-- Request Headers - used in an HTTP request and do not relate to the content
-- Response Headers - used in an HTTP response and do not relate to the content
-- Security Headers - class of response headers used to specify certain rules and policies to be followed
+- **General Headers** - contextual and used to describe the message
+- **Entity Headers** - used to describe the content transferred by a message
+- **Request Headers** - used in an HTTP request and do not relate to the content
+- **Response Headers** - used in an HTTP response and do not relate to the content
+- **Security Headers** - class of response headers used to specify certain rules and policies to be followed
 
 cuRL can be used to see the response headers via the "**-I**" flag:
 
