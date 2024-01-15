@@ -1,0 +1,66 @@
+site_name: Web Apps Knowledge Base
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+    - content.tooltips
+  language: en
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+      primary: teal
+      accent: purple
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+      primary: teal
+      accent: blue
+
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/ComplexSec
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/SecComplex
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/jonathan-james-pake/
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - tables
+  - md_in_html
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - abbr
+
+plugins:
+  - glightbox
+
+copyright: |
+  &copy; 2023 <a href="https://github.com/ComplexSec" target="_blank" rel="noopener">Jonathan Pake</a>
