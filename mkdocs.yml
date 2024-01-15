@@ -59,8 +59,5 @@ markdown_extensions:
       custom_checkbox: true
   - abbr
 
-plugins:
-  - glightbox
-
 copyright: |
   &copy; 2023 <a href="https://github.com/ComplexSec" target="_blank" rel="noopener">Jonathan Pake</a>
