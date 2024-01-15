@@ -1,4 +1,4 @@
-# Home Page
+# Main Pages
 
 For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
@@ -53,3 +53,5 @@ def bubble_sort(items):
 :smile:
 
 :fontawesome-regular-face-laugh-wink:
+
+[Page 2](page2.md)
